@@ -3,6 +3,9 @@ const defaultState = (localStorage.getItem('list') != null) ? JSON.parse(localSt
 const addList = (name) => ({ type: "ADD_LIST", name});
 const addTodoInList = (item, key) => ({type: "ADD_TODO", key, item});
 
+const removeList = (index) => ({ type: "REMOVE_LIST", index});
+const removeTodoInList = (i, key) => ({type: "REMOVE_TODO", key, i})
+
 //reducer
 const reducer = (state = defaultState, action) => {
     const st = Object.assign({}, state);
@@ -13,6 +16,13 @@ const reducer = (state = defaultState, action) => {
             return st;
         case "ADD_TODO":
             st[action.key].push(action.item);
+            return st;
+        case "REMOVE_LIST":
+            delete st[action.index];
+            return st;
+        case "REMOVE_TODO":
+            st[action.key].splice(action.i, 1);
+            
             return st;
         default:
             return st;
@@ -44,6 +54,12 @@ const app = new Vue({
       addTodo(todo, key){
         store.dispatch(addTodoInList(todo, key));
         
+      },
+      deleteList(key){
+        store.dispatch(removeList(key))
+      },
+      deleteTodo(index, key){
+        store.dispatch(removeTodoInList(index, key))
       }
     },
     computed: {

@@ -15,9 +15,9 @@
         <div class="list">
             <ul>
                 <li v-for="list, key in lists" :key="key">
-                    <p @click="changeShow(key)">{{key}}</p>
+                    <p @click="changeShow(key)">{{key}}  <span @click="deleteList(key)">X</span></p>
                     <ol v-show="show == key">
-                        <li v-for="item, index in list" :key="index">{{item}}</li>
+                        <li v-for="item, index in list" :key="index">{{item}} <span @click="deleteTodo(index, key)">X</span></li>
                         <button v-on:click="create"> + add</button>
                         <input type="text" name="todo" @keyup.enter="(event) => {
 							addTodo(event.target.value, key);
