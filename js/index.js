@@ -1,4 +1,4 @@
-const defaultState = (localStorage.getItem('list') != null) ? JSON.parse(localStorage.getItem('list')) : {'groceries': ["onion", "tomatoes", "vegi"], "snacks":["biscuits", "banana", "milk"],};
+const defaultState = (localStorage.getItem('list') != null) ? JSON.parse(localStorage.getItem('list')) : {};
 // actionCreator
 const addList = (name) => ({ type: "ADD_LIST", name});
 const addTodoInList = (item, key) => ({type: "ADD_TODO", key, item});
