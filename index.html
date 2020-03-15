@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="app">
+    	<form id="in" @submit.prevent="send">
+    		<input type="text" name="listName" id="listName" placeholder="Create a new List">
+    		<input type="submit" value="Create">
+    	</form>
+        <div class="list">
+            <ul>
+                <li v-for="list, key in lists" :key="key">
+                    <p @click="changeShow(key)">{{key}}</p>
+                    <ol v-show="show == key">
+                        <li v-for="item, index in list" :key="index">{{item}}</li>
+                        <button v-on:click="create"> + add</button>
+                        <input type="text" name="todo" @keyup.enter="(event) => {
+							addTodo(event.target.value, key);
+							event.target.value = '';
+                    	}" v-show="createItem">
+                    </ol>
+                </li>
+            </ul>
+        </div>
+    </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
